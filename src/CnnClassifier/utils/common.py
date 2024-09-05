@@ -12,42 +12,31 @@ import base64
 
 
 @ensure_annotations
-def read_yaml(path_to_yaml: Path) -> ConfigBox:
-    """reads yaml file and returns
+def read_yaml(file_path: str) -> ConfigBox:
+    """
+    Reads a YAML file and returns a ConfigBox object.
 
     Args:
-        path_to_yaml (str): path like input
-
-    Raises:
-        ValueError: if yaml file is empty
-        e: empty file
+        file_path (str): Path to the YAML configuration file.
 
     Returns:
-        ConfigBox: ConfigBox type
+        ConfigBox: Configuration parameters.
     """
-    try:
-        with open(path_to_yaml) as yaml_file:
-            content = yaml.safe_load(yaml_file)
-            logger.info(f"yaml file: {path_to_yaml} loaded successfully")
-            return ConfigBox(content)
-    except BoxValueError:
-        raise ValueError("yaml file is empty")
-    except Exception as e:
-        raise e
+    with open(file_path, "r") as yaml_file:
+        content = yaml.safe_load(yaml_file)
+    return ConfigBox(content)
 
 
 @ensure_annotations
-def create_directories(path_to_directories: list, verbose=True):
-    """create list of directories
+def create_directories(dirs: list):
+    """
+    Creates directories if they do not exist.
 
     Args:
-        path_to_directories (list): list of path of directories
-        ignore_log (bool, optional): ignore if multiple dirs is to be created. Defaults to False.
+        dirs (list): List of directory paths to create.
     """
-    for path in path_to_directories:
-        os.makedirs(path, exist_ok=True)
-        if verbose:
-            logger.info(f"created directory at: {path}")
+    for dir_path in dirs:
+        os.makedirs(dir_path, exist_ok=True)
 
 
 @ensure_annotations
