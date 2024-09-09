@@ -60,5 +60,7 @@ class ConfigurationManager:
         )
 
         return prepare_callback_config
+    
+    
 
 
