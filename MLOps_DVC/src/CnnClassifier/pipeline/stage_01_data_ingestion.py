@@ -2,6 +2,9 @@ from src.CnnClassifier.utils import logger
 from pathlib import Path
 from src.CnnClassifier.config.configuration import ConfigurationManager
 from src.CnnClassifier.components.data_ingestion import DataIngestion
+import sys
+
+print("Python executable being used:", sys.executable)
 
 
 STAGE_NAME = "Data Ingestion Stage"
